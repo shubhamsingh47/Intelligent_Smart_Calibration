@@ -1,0 +1,42 @@
+==> 2025-05-10 13:11:11 <==
+# cmd: C:\Users\thaku\anaconda3\Scripts\conda-script.py create -p venv python==3.9
+# conda version: 24.1.2
++defaults/noarch::pip-25.1-pyhc872135_2
++defaults/noarch::tzdata-2025b-h04d1e81_0
++defaults/win-64::ca-certificates-2025.2.25-haa95532_0
++defaults/win-64::openssl-1.1.1w-h2bbff1b_0
++defaults/win-64::python-3.9.0-h6244533_2
++defaults/win-64::setuptools-78.1.1-py39haa95532_0
++defaults/win-64::sqlite-3.45.3-h2bbff1b_0
++defaults/win-64::vc-14.42-haa95532_5
++defaults/win-64::vs2015_runtime-14.42.34433-hbfb602d_5
++defaults/win-64::wheel-0.45.1-py39haa95532_0
+# update specs: ['python==3.9']
+==> 2025-05-10 13:59:19 <==
+# cmd: C:\Users\thaku\anaconda3\Scripts\conda-script.py update --all
+# conda version: 24.1.2
+-defaults/win-64::openssl-1.1.1w-h2bbff1b_0
+-defaults/win-64::python-3.9.0-h6244533_2
++defaults/win-64::openssl-3.0.16-h3f729d1_0
++defaults/win-64::python-3.9.21-h8205438_1
+# neutered specs: ['python==3.9.21']
+==> 2025-05-10 14:00:39 <==
+# cmd: C:\Users\thaku\anaconda3\Scripts\conda-script.py install pandas --force-reinstall
+# conda version: 24.1.2
++defaults/noarch::python-tzdata-2025.2-pyhd3eb1b0_0
++defaults/win-64::blas-1.0-mkl
++defaults/win-64::bottleneck-1.4.2-py39hc99e966_0
++defaults/win-64::intel-openmp-2023.1.0-h59b6b97_46320
++defaults/win-64::mkl-2023.1.0-h6b88ed4_46358
++defaults/win-64::mkl-service-2.4.0-py39h827c3e9_2
++defaults/win-64::mkl_fft-1.3.11-py39h827c3e9_0
++defaults/win-64::mkl_random-1.2.8-py39hc64d2fc_0
++defaults/win-64::numexpr-2.10.1-py39h4cd664f_0
++defaults/win-64::numpy-2.0.1-py39h055cbcc_1
++defaults/win-64::numpy-base-2.0.1-py39h65a83cf_1
++defaults/win-64::pandas-2.2.3-py39h5da7b33_0
++defaults/win-64::python-dateutil-2.9.0post0-py39haa95532_2
++defaults/win-64::pytz-2024.1-py39haa95532_0
++defaults/win-64::six-1.17.0-py39haa95532_0
++defaults/win-64::tbb-2021.8.0-h59b6b97_0
+# update specs: ['pandas']
