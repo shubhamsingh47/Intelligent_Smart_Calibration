@@ -173,3 +173,11 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Exclude Excel files
+*.xlsx
+*.xls
+
+# Exclude CSV and TSV files
+*.csv
+*.tsv
