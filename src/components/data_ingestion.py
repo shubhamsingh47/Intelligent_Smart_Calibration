@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import os
+import sys
 from src.logger import logging
 from src.exception import CustomException
 
@@ -35,4 +36,4 @@ class DataIngestion:
             return df_ref, df_dev, feature_cols
 
         except Exception as e:
-            raise CustomException(f"Error in Data Ingestion: {str(e)}")
+            raise CustomException(e,sys)
