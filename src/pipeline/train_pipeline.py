@@ -43,7 +43,7 @@ class TrainPipeline:
             fig, ax = plt.subplots(figsize=(8, 4))
             sns.kdeplot(df_dev[col], label="Original Deviated", ax=ax)
             sns.kdeplot(df_calibrated[col], label="Calibrated", ax=ax, color='black', linestyle=':')
-            sns.kdeplot(df_ref[col], label="Reference", ax=ax, color='r',alpha = 0.5)
+            sns.kdeplot(df_ref[col], label="Reference", ax=ax, color='r', alpha = 0.5)
             ax.set_title(f"{col} - Calibration Comparison")
             ax.legend()
             plt.tight_layout()

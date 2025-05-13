@@ -9,7 +9,7 @@ list_of_files = [
     f"src/components/data_transformation.py",
     f"src/components/model_trainer.py",
     f"src/pipeline/__init__.py",
-    f"src/pipeline/predict_pipeline.py",
+    f"src/pipeline/calibration.py",
     f"src/pipeline/train_pipeline.py",
     f"src/exception.py",
     f"src/logger.py",
