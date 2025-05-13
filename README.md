@@ -20,17 +20,17 @@ cd Intelligent_Smart_Calibration
 ```
 
 2. **Create virtual environment**
-```
+```bash
 python -m venv venv
 venv\Scripts\activate
 ```
 
 3. **Install dependencies**
-```
+```bash
 pip install -r requirements.txt
 ```
 
 4. **Run the Streamlit app**
-```
+```bash
 streamlit run app.py
 ```
