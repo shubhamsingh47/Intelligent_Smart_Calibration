@@ -1,17 +1,36 @@
 # Intelligent Smart Calibration
 
 ## Welcome to the **Intelligent Calibration Engine** 
-### Precision Calibration for Medical & Industrial Sensors  
+### An end-to-end Machine Learning application that intelligently calibrates sensor readings from medical or industrial sensors.
 
-* Step 1: Upload your data 📤 
-* Step 2: Select target column, reference and deviated values.
-* Step 3: Click on Run Calibration to auto-calibrate using ML models. 
-* Step 4: View calibration plots.
-* Step 5: Download corrected data 📥  
+## 💡 Features
+- Upload sensor data directly (.xlsx, .csv, .xls, .tsv)
+- Automated calibration using ML models.
+- Visualization of calibrated vs. reference distributions.
+- Download calibrated results 📥 
+- Clean and responsive UI with navigation menu.
 
-#### **💡 Key Features:**  
-    - **Automated Calibration** powered by advanced ML models  
-    - **Visual Calibration Analysis** through intuitive sensor plots  
-    - **Instant Data Correction** with downloadable refined datasets  
+## 📦 Setup Instructions
 
-**🔍 Navigate using the menu to get started and transform your sensor data with precision!**
+1. **Clone the repository**
+
+```bash
+git clone https://github.com/shubhamsingh47/Intelligent_Smart_Calibration.git
+cd Intelligent_Smart_Calibration 
+```
+
+2. **Create virtual environment**
+```
+python -m venv venv
+venv\Scripts\activate
+```
+
+3. **Install dependencies**
+```
+pip install -r requirements.txt
+```
+
+4. **Run the Streamlit app**
+```
+streamlit run app.py
+```
