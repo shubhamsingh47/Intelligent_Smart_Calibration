@@ -74,7 +74,7 @@ def render_ui():
                 st.session_state.trigger_reset = False
                 run_calibration(uploaded_file, target_col, ref_val, dev_val)
             else:
-                st.warning("Please fill in all inputs and upload a valid Excel file.")
+                st.warning("Please fill in all inputs and upload a valid data file.")
 
         if st.session_state.calibrated_done:
             show_results()
