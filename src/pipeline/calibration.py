@@ -4,17 +4,19 @@ import streamlit as st
 
 
 def run_calibration(uploaded_file, target_col, ref_val, dev_val):
-    with open("temp.xlsx", "wb") as f:
-        f.write(uploaded_file.getbuffer())
-
-    pipeline = TrainPipeline("temp.xlsx", target_col, ref_val, dev_val)
+    pipeline = TrainPipeline(
+        uploaded_file=uploaded_file,
+        target_column=target_col,
+        reference_value=ref_val,
+        deviated_value=dev_val
+    )
     output_df, model_used, figures = pipeline.run_pipeline()
 
     st.session_state.output_df = output_df
     st.session_state.model_used = model_used
     st.session_state.figures = figures
     st.session_state.calibrated_done = True
-    st.success(f"✅ Calibration completed.")
+    st.success(f"✅ Calibration completed")
 
 
 def setup_session_state():

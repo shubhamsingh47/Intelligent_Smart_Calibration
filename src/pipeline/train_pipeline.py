@@ -6,8 +6,8 @@ import pandas as pd
 
 
 class TrainPipeline:
-    def __init__(self, file_path, target_column, reference_value, deviated_value, output_path='calibrated_output.xlsx'):
-        self.file_path = file_path
+    def __init__(self, uploaded_file, target_column, reference_value, deviated_value, output_path='calibrated_output.xlsx'):
+        self.uploaded_file = uploaded_file
         self.target_column = target_column
         self.reference_value = reference_value
         self.deviated_value = deviated_value
@@ -15,10 +15,11 @@ class TrainPipeline:
 
     def run_pipeline(self):
         data_loader = DataIngestion(
-            self.file_path,
-            self.target_column,
-            self.reference_value,
-            self.deviated_value
+            file=self.uploaded_file,
+            filename=self.uploaded_file.name,
+            target_column=self.target_column,
+            reference_value=self.reference_value,
+            deviated_value=self.deviated_value
         )
 
         df_ref, df_dev, feature_cols = data_loader.load_data()
