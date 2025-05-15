@@ -6,3 +6,4 @@ openpyxl
 #-e .
 seaborn
 streamlit-option-menu
+xlsxwriter
