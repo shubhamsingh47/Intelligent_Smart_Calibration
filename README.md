@@ -34,3 +34,5 @@ pip install -r requirements.txt
 ```bash
 streamlit run app.py
 ```
+
+**NOTE** - Just make sure to append reference data and deviated data (needs calibration), both data in single sheet, with proper segmentation.
