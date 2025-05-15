@@ -43,18 +43,30 @@ def render_ui():
     if selected == "Home":
         st.title("Intelligent Calibration System")
         st.markdown("""
-        ## Welcome to the **Intelligent Calibration Engine** 
-        ### Precision Calibration for Medical & Industrial Sensors  
+        ## 📘 Welcome to the **Intelligent Calibration Engine** 
 
-        #### 📜 Upload your Excel, CSV or TSV  file, define reference and deviated devices, and let our intelligent system handle the rest.  
+        #### Precision Calibration for Medical & Industrial Sensors  
 
-        #### **💡 Key Features:**  
-        - **Automated Calibration** powered by advanced ML models  
-        - **Visual Calibration Analysis** through intuitive sensor plots  
-        - **Instant Data Correction** with downloadable refined datasets  
+        ### 📌 How to Use This App 
 
-        **🔍 Navigate using the menu to get started and transform your sensor data with precision!**
+        ### Required Format (Example): 
+
+        | Feature_1  | Feature_2 | Feature_3 | Feature_4 |     Sensor     |
+        |------------|-----------|-----------|-----------|----------------|
+        |    100     |   100     |    100    |    100    |   Sensor_1     |
+        |    200     |   200     |    200    |    200    |   Sensor_43    |
+        
+        ###  For above data: 
+        - **We enter `Sensor` as target column, Reference as `Sensor_1` and Deviated as `Sensor_43`**
+        - **This will make `Sensor_43` values behave similar to `Sensor_1` values**
+        - **If we want `Sensor_1` to behave like `Sensor_43`, we just interchange the Reference and Deviated.**
+        
+        ### Note 
+        - **Data can be of N number of columns just add the Categorical column and specify how you want your data to be calibrated**
+        - **Ensure your file follows this format for accurate results.**
+       
         """)
+
 
     elif selected == "Calibrate":
         st.title("Calibrate Device Readings")
