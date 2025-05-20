@@ -27,8 +27,17 @@ class TrainPipeline:
         X_train = df_dev[feature_cols].values
         y_train = df_ref[feature_cols].values
 
-        trainer = ModelTrainer(X_train, y_train, X_train)
+        trainer = ModelTrainer(
+            X_train_dev=X_train,
+            y_train_ref=y_train,
+            X_full_dev=df_dev[feature_cols].values,
+            min_threshold=100,
+            max_threshold=18000
+        )
+
         calibrated_data, best_model = trainer.train_and_calibrate()
+
+        #calibrated_data, best_model = trainer.train_and_calibrate()
 
         # Final DataFrame
         df_calibrated = df_dev.copy()

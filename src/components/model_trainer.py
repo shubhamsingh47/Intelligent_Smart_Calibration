@@ -1,41 +1,39 @@
-import numpy as np
 from sklearn.linear_model import HuberRegressor
-from sklearn.metrics import mean_squared_error
-from src.components.data_transformation import QuantileMapping, match_reference_stats
-from src.logger import logging
-
+from sklearn.preprocessing import MinMaxScaler
+import numpy as np
 
 class ModelTrainer:
-    def __init__(self, X_train, y_train, X_full):
-        self.X_train = X_train
-        self.y_train = y_train
-        self.X_full = X_full
+    def __init__(self, X_train_dev, y_train_ref, X_full_dev, min_threshold=None, max_threshold=None):
+        self.X_train_dev = X_train_dev
+        self.y_train_ref = y_train_ref
+        self.X_full_dev = X_full_dev
+        self.min_threshold = min_threshold
+        self.max_threshold = max_threshold
 
     def train_and_calibrate(self):
-        min_len = min(len(self.X_train), len(self.y_train))
-        X_sample = self.X_train[:min_len]
-        y_sample = self.y_train[:min_len]
+        # Step 1: Scale using MinMax
+        self.dev_scaler = MinMaxScaler()
+        self.ref_scaler = MinMaxScaler()
 
-        # Huber
-        huber_models = [HuberRegressor().fit(X_sample[:, i].reshape(-1, 1), y_sample[:, i]) for i in
-                        range(X_sample.shape[1])]
-        huber_preds = np.column_stack([
-            model.predict(self.X_full[:, i].reshape(-1, 1)) for i, model in enumerate(huber_models)
+        X_dev_scaled = self.dev_scaler.fit_transform(self.X_train_dev)
+        y_ref_scaled = self.ref_scaler.fit_transform(self.y_train_ref)
+
+        # Step 2: Train model
+        self.models = [HuberRegressor().fit(X_dev_scaled[:, i].reshape(-1, 1), y_ref_scaled[:, i])
+                       for i in range(X_dev_scaled.shape[1])]
+
+        # Step 3: Predict on full dev set
+        X_full_dev_scaled = self.dev_scaler.transform(self.X_full_dev)
+        preds_scaled = np.column_stack([
+            model.predict(X_full_dev_scaled[:, i].reshape(-1, 1))
+            for i, model in enumerate(self.models)
         ])
 
-        # Quantile Mapping
-        qm = QuantileMapping()
-        qm.fit(X_sample, y_sample)
-        qm_preds = qm.transform(self.X_full)
+        # Step 4: Inverse transform to get original scale
+        preds_original = self.ref_scaler.inverse_transform(preds_scaled)
 
-        # Evaluate
-        mse_huber = mean_squared_error(y_sample, huber_preds[:min_len])
-        mse_qm = mean_squared_error(y_sample, qm_preds[:min_len])
-        logging.info(f"Huber MSE: {mse_huber:.2f}, Quantile Mapping MSE: {mse_qm:.2f}")
+        # Step 5: Optional clipping
+        if self.min_threshold is not None and self.max_threshold is not None:
+            preds_original = np.clip(preds_original, self.min_threshold, self.max_threshold)
 
-        best_preds = huber_preds if mse_huber < mse_qm else qm_preds
-        best_preds = match_reference_stats(best_preds, y_sample)
-        best_model = 'Huber' if mse_huber < mse_qm else 'Quantile Mapping'
-
-        logging.info(f" Selected Model: {best_model}")
-        return best_preds, best_model
+        return preds_original, "Huber (MinMax + Inverse)"
