@@ -36,3 +36,6 @@ streamlit run app.py
 ```
 
 **NOTE** - Just make sure to append reference data and deviated data (needs calibration), both data in single sheet, with proper segmentation.
+
+## Project Snippet 
+![Intelligent_smart_calibration](https://github.com/user-attachments/assets/ee585e3a-f7c5-4214-8c31-12adaf1e490d)
