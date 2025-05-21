@@ -6,12 +6,15 @@ import pandas as pd
 
 
 class TrainPipeline:
-    def __init__(self, uploaded_file, target_column, reference_value, deviated_value, output_path='calibrated_output.xlsx'):
+    def __init__(self, uploaded_file, target_column, reference_value, deviated_value, min_threshold=None,
+                 max_threshold=None, output_path='calibrated_output.xlsx'):
         self.uploaded_file = uploaded_file
         self.target_column = target_column
         self.reference_value = reference_value
         self.deviated_value = deviated_value
         self.output_path = output_path
+        self.min_threshold = min_threshold
+        self.max_threshold = max_threshold
 
     def run_pipeline(self):
         data_loader = DataIngestion(
@@ -31,13 +34,13 @@ class TrainPipeline:
             X_train_dev=X_train,
             y_train_ref=y_train,
             X_full_dev=df_dev[feature_cols].values,
-            min_threshold=100,
-            max_threshold=18000
+            min_threshold=self.min_threshold,
+            max_threshold=self.max_threshold
         )
 
         calibrated_data, best_model = trainer.train_and_calibrate()
 
-        #calibrated_data, best_model = trainer.train_and_calibrate()
+        # Change threshold for users to make it dynamic
 
         # Final DataFrame
         df_calibrated = df_dev.copy()
@@ -53,7 +56,7 @@ class TrainPipeline:
             fig, ax = plt.subplots(figsize=(8, 4))
             sns.kdeplot(df_dev[col], label="Original Deviated", ax=ax)
             sns.kdeplot(df_calibrated[col], label="Calibrated", ax=ax, color='black', linestyle=':')
-            sns.kdeplot(df_ref[col], label="Reference", ax=ax, color='r', alpha = 0.5)
+            sns.kdeplot(df_ref[col], label="Reference", ax=ax, color='r', alpha=0.5)
             ax.set_title(f"{col} - Calibration Comparison")
             ax.legend()
             plt.tight_layout()

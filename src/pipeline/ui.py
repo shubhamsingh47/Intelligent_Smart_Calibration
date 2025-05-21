@@ -81,10 +81,13 @@ def render_ui():
         if st.session_state.get("trigger_reset", True):
             st.session_state.calibrated_done = False
 
+        min_threshold = st.number_input(" Minimum Threshold (Optional)")
+        max_threshold = st.number_input(" Maximum Threshold (Optional)")
+
         if st.button("Run Calibration"):
             if uploaded_file and target_col and ref_val and dev_val:
                 st.session_state.trigger_reset = False
-                run_calibration(uploaded_file, target_col, ref_val, dev_val)
+                run_calibration(uploaded_file, target_col, ref_val, dev_val, min_threshold, max_threshold)
             else:
                 st.warning("Please fill in all inputs and upload a valid data file.")
 

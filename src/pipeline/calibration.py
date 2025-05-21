@@ -3,12 +3,14 @@ from src.pipeline.train_pipeline import TrainPipeline
 import streamlit as st
 
 
-def run_calibration(uploaded_file, target_col, ref_val, dev_val):
+def run_calibration(uploaded_file, target_col, ref_val, dev_val, min_threshold, max_threshold):
     pipeline = TrainPipeline(
         uploaded_file=uploaded_file,
         target_column=target_col,
         reference_value=ref_val,
-        deviated_value=dev_val
+        deviated_value=dev_val,
+        min_threshold=min_threshold,
+        max_threshold=max_threshold
     )
     output_df, model_used, figures = pipeline.run_pipeline()
 
