@@ -81,8 +81,8 @@ def render_ui():
         if st.session_state.get("trigger_reset", True):
             st.session_state.calibrated_done = False
 
-        min_threshold = st.number_input(" Minimum Threshold (Optional)")
-        max_threshold = st.number_input(" Maximum Threshold (Optional)")
+        min_threshold = st.number_input(" Minimum Threshold (For better results)")
+        max_threshold = st.number_input(" Maximum Threshold (For better results)")
 
         if st.button("Run Calibration"):
             if uploaded_file and target_col and ref_val and dev_val:
